@@ -1,3 +1,10 @@
+"Electronics"	1.25
+"Electronics"	1.26
+"Electronics"	1.25
+"Electronics"	1.25
+"Electronics"	1.23
+"Furniture"	1.24
+"Furniture"	1.24
 "Furniture"	1.25
 "Furniture"	1.24
 "Furniture"	1.24
@@ -9,13 +16,6 @@
 "Books"	1.25
 "Books"	1.26
 "Books"	1.24
-"Electronics"	1.25
-"Electronics"	1.26
-"Electronics"	1.25
-"Electronics"	1.25
-"Electronics"	1.23
-"Furniture"	1.24
-"Furniture"	1.24
 "Clothing"	1.26
 "Sports"	1.25
 "Sports"	1.27
