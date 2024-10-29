@@ -23,7 +23,7 @@ class ProductConversionRate(MRJob):
             product_category = fields[2]  # Product category
             yield product_id, ('purchase', product_category)
 
-    def reducer(self, product_id, values):
+    def reducer_product_conversion(self, product_id, values):
         interactions = 0
         purchases = 0
         category = None
@@ -41,8 +41,25 @@ class ProductConversionRate(MRJob):
             conversion_rate = purchases / interactions
             yield category, round(conversion_rate, 2)
 
+    def reducer_category_average(self, category, conversion_rates):
+        total_conversion_rate = 0
+        count = 0
+
+        # Sum up the conversion rates and count the products per category
+        for conversion_rate in conversion_rates:
+            total_conversion_rate += conversion_rate
+            count += 1
+
+        # Calculate average conversion rate per category
+        if count > 0:
+            average_conversion_rate = total_conversion_rate / count
+            yield category, round(average_conversion_rate, 2)
+
     def steps(self):
-        return [MRStep(mapper=self.mapper, reducer=self.reducer)]
+        return [
+            MRStep(mapper=self.mapper, reducer=self.reducer_product_conversion),
+            MRStep(reducer=self.reducer_category_average)
+        ]
 
 if __name__ == '__main__':
     ProductConversionRate.run()
